@@ -1,6 +1,8 @@
 name: Android Build
 
-on: pull_request
+on:
+  push:
+    branches: [ne/actions]
 
 jobs:
    build:
@@ -18,6 +20,15 @@ jobs:
        - name: Run Tests
          run: ./gradlew test
 
-       - name: Build Project
-         run: ./gradlew assemble
+       - name: Build Debug apk
+         run: ./gradlew assembleDebug
+
+       artifacts:
+         - app/build/output/apk/debug/*.apk
+
+       publishing:
+         email:
+           recipients:
+             -harshjasani12345@gmail.com
+
 
